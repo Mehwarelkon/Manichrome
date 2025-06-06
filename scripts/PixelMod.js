@@ -7,12 +7,13 @@ export class PixelMod{
         this.height=height;
         this.currentPixelColor=[0,0,0,0];
         this.loop=null;
-        this.Mod=this.main.ctx.getImageData((window.innerWidth-this.width)/2+this.center[0],(window.innerHeight-this.height)/2 -this.center[1],this.width,this.height);
+        this.Mod=null;
     }
     draw(){
+        this.Mod=this.main.ctx.getImageData((window.innerWidth-this.width)/2+this.center[0],(window.innerHeight-this.height)/2 -this.center[1],this.width,this.height);
         for(let y=0;y<this.height;y++){
             for(let x=0;x<this.width;x++){
-                this.loop(x,y);
+                this.loop(x,this.height-y-1);
                 this.Mod.data[(y*this.width+x)*4]=this.currentPixelColor[0];
                 this.Mod.data[(y*this.width+x)*4+1]=this.currentPixelColor[1];
                 this.Mod.data[(y*this.width+x)*4+2]=this.currentPixelColor[2];

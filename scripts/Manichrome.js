@@ -3,13 +3,17 @@ export * from './Line.js';
 export * from './Circle.js';
 export * from './Dot.js';
 export * from './Rect.js';
-export * from './Triangle.js'
-export * from './PixelMod.js'
-
-class Vector{
+export * from './Triangle.js';
+export * from './PixelMod.js';
+export * from './Sprite.js';
+export * from './Vector.js';
+class Poly{
     
 }
-class Poly{
+class mainClear{
+    
+}
+class graph{
     
 }
 //[grid,graph,rect,polygon,Vector,Text,Latex]

@@ -39,6 +39,13 @@ function circle(){
     tri.theta=i;
     tri.draw([0,0])
 }
-main.addProcess([circle,0,10000]);
+const vec= new Man.Vector(main,[0,0,100,0])
+function Vect(){
+     
+    cir.draw();
+}
+main.addProcess([Vect,2000,10000]);
+main.addProcess([circle,0,2000]);
+
 main.refresh();
 

@@ -26,7 +26,7 @@ export class Triangle{
        
         
         
-        console.log(center);
+        //console.log(center);
         this.main.ctx.beginPath();
         this.main.ctx.moveTo((center[0]+r1*Math.cos(phi1+this.theta))+window.innerWidth/2,-(center[1]+r1*Math.sin(phi1+this.theta))+window.innerHeight/2);
         this.main.ctx.lineTo((center[0]+r2*Math.cos(phi2+this.theta))+window.innerWidth/2,-(center[1]+r2*Math.sin(phi2+this.theta))+window.innerHeight/2);

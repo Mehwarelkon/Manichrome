@@ -83,10 +83,34 @@ main.refresh();
 // you can make finish = undifined for infinit loop 
 // triangles and vectors is being worked on 
 // there is an intention for event listeners
+/*
+  //section 5
+
+var i=0
 const main = new Man.Main();
-const Pi = new Man.PixelMod(main,100,200,[0,0]);
+const Pi = new Man.PixelMod(main,150,255,[0,0]);
 function P(x,y){
-    Pi.currentPixelColor=[x+y,0,255-x-y,255];
+    Pi.currentPixelColor=[Math.abs(Math.cos(i)*(255-y)),0,Math.abs(Math.sin(i)*y),255];
 }
 Pi.loop=P;
-Pi.draw()
+
+function frames(){
+    Pi.draw();
+    i+=Math.PI/60;
+}
+main.addProcess([frames,0,10000]);
+main.refresh();
+*/
+/*
+ //section 6
+const main = new Man.Main();
+const spr = new Man.Sprite(main,[0,0],'./scripts/THK.jpeg');
+const cir = new Man.Circle(main,[0,0],100,Math.PI*2);
+//cir.isFilled=true;
+function D(){
+    spr.draw();
+    cir.draw();
+}
+main.addProcess([D,0,10000]);
+main.refresh();
+*/
