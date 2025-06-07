@@ -7,6 +7,7 @@ export * from './Triangle.js';
 export * from './PixelMod.js';
 export * from './Sprite.js';
 export * from './Vector.js';
+export * from './Path.js';
 class Poly{
     
 }

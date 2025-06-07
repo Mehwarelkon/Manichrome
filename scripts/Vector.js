@@ -20,6 +20,8 @@ export class Vector{
         this.main.ctx.stroke();
         this.tip.theta=phi;
         this.tip.isFilled=true;
+        this.tip.fillColor=this.color;
+        this.tip.lineColor=this.color
         this.tip.draw([this.point[0],this.point[1]]);
     }
     update(r,angle){

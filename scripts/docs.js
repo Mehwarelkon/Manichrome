@@ -83,7 +83,7 @@ main.refresh();
 // you can make finish = undifined for infinit loop 
 // triangles and vectors is being worked on 
 // there is an intention for event listeners
-/*
+
   //section 5
 
 var i=0
@@ -94,13 +94,14 @@ function P(x,y){
 }
 Pi.loop=P;
 
-function frames(){
+function frames(delta){
     Pi.draw();
     i+=Math.PI/60;
+    console.log(delta);
 }
 main.addProcess([frames,0,10000]);
 main.refresh();
-*/
+
 /*
  //section 6
 const main = new Man.Main();
