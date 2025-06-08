@@ -8,9 +8,9 @@ export * from './PixelMod.js';
 export * from './Sprite.js';
 export * from './Vector.js';
 export * from './Path.js';
-class Poly{
-    
-}
+export * from './Grid.js';
+export * from './Graph.js'
+
 class mainClear{
     
 }
