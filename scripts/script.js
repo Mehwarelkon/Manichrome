@@ -1,17 +1,109 @@
 import * as Man from './Manichrome.js';
-var i=0
+/*var i=0;
 function f(x){
     return (x**2)*i;
 }
-const main = new Man.Main();
-const grid =new Man.Grid(main,50,50,1);
-const graph =new Man.LinearGraph(main,f,[-5,5],50,50);
-graph.inc=0.01;
 
+const main = new Man.Main();
+
+const dot =new Man.Dot(main,[100,100]);
+const event =new Man.TouchEventListener(main);
+event.dots.push(dot);
+event.call();
+
+const grid =new Man.Grid(main,50,50,1);
+grid.axisColor=[255,0,0,1];
+grid.color=[0,0,255,1];
+const graph =new Man.LinearGraph(main,f,[-5,5],50,50);
+graph.color=[0,255,0,1];
+graph.inc=0.01;
+const vec=new Man.Vector(main,[0,0,0,0]);
+vec.color=[0,0,255,1];
 function anim(delta){
-    i+=0.01;
+    i=dot.point[0]/20;
+    dot.point[1]=0;
+  //  i+=0.01;
+    vec.point[2]=1*50;
+    vec.point[3]=f(1)*50;
     grid.draw();
     graph.draw();
+    vec.draw();
+    dot.draw();
+    
 }
-main.addProcess([anim,0,10000]);
+main.addProcess([anim,0,undefined]);
+main.refresh();
+*/
+/*
+const main =new Man.Main();
+const dot =new Man.Dot(main,[0,0]);
+const dot2 =new Man.Dot(main,[30,30]);
+const event =new Man.EventListener(main);
+event.dots.push(dot);
+event.dots.push(dot2);
+dot.size=10;
+dot2.size=10;
+event.call();
+function anim(delta){
+    dot.draw();
+    dot2.draw();
+   // console.log(dot.drag)
+}
+main.addProcess([anim,0,undefined]);
+main.refresh();
+*/
+/*
+const main =new Man.Main();
+const dot =new Man.Dot(main,[100,100]);
+const line =new Man.Line(main,[0,0,100,100])
+const event =new Man.TouchEventListener(main);
+event.dots.push(dot);
+line.thick=2;
+event.fun=(e)=>{
+    line.point[2]=dot.point[0];
+    line.point[3]=dot.point[1];
+};
+event.call();
+function anim(delta){
+    dot.draw();
+    line.draw();
+    //console.log(delta);
+   // console.log(dot.drag)
+}
+main.addProcess([anim,0,undefined]);
+main.refresh();
+*/
+/*
+const main =new Man.Main();
+const dot =new Man.Dot(main,[100,0]);
+dot.size=4;
+const vec =new Man.Vector(main,[0,0,0,0]);
+vec.tipSize=3;
+var V=0;
+var F=0;
+function anim(delta){
+    F=-dot.point[0]/300;
+    V+=F;
+    dot.point[0]+=V;
+    dot.draw();
+    vec.point[2]=Math.max(-98,Math.min(98,dot.point[0]));
+    vec.draw();
+}
+main.addProcess([anim,0,undefined]);
+main.refresh();
+*/
+const main=new Man.Main();
+const line=new Man.Line(main,[-100,-100,-100,-100]);
+line.makeEaseInOutAnimation([-100,-100,100,100],[255,0,0,1],5,1000,2500);
+const vec =new Man.Vector(main,[100,100,100,100]);
+//vec.thick=0;
+//vec.color[3]=0;
+vec.tipSize=0;
+vec.makeEaseInOutAnimation([100,100,-100,-100],[0,0,255,1],3,3,1000,2250);
+function anim(delta){
+   // line.draw();
+    vec.draw();
+    console.log(vec.point[2]);
+}
+main.addProcess([anim,1000,10000]);
 main.refresh();

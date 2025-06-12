@@ -52,9 +52,6 @@ const line1 = new Man.Line(main, [0, 0, 60, 80]);
 // Create a circle centered at (0, 0) with radius 100 and full angle (2π)
 const cir = new Man.Circle(main, [0, 0], 100, 2 * Math.PI);
 
-// Initial static draw (just to show them once before animation)
-line1.draw();
-cir.draw();
 
 let i = 0;
 
@@ -163,7 +160,7 @@ function frames(delta) {
 
 main.addProcess([frames, 0, 10000]);
 main.refresh();
-*
+*/
 /*
 // section 6: Using Sprites with Other Objects
 
@@ -290,8 +287,8 @@ main.addProcess([Vect, 2000, 10000]);
 main.refresh();
 */
 /*
-  // section 8 static path remdring
-// Create the main canvas or scene manager
+  // section 8 static path rendring
+// Create the main canvas
 const main = new Man.Main();
 
 // Create an empty linear path (a series of connected line segments)
@@ -302,7 +299,7 @@ for (let i = 0; i < 100; i++) {
     // Add a point (x, y) to the path
     // x = i, y = 2i => this forms a straight line with slope 2
     path.points.push(i);     // x-coordinate
-    path.points.push(2 * i); // y-coordinate
+    path.points.push(2*i); // y-coordinate
 
     // Assign a color for each segment (makes it a gradient)
     // Red increases gradually from 0 to 255 as i increases
@@ -319,8 +316,10 @@ path.draw();
 // Draw the vector (a red arrow)
 vec.draw();
 */
-/*
+
+//section 9
 // Create the canvas context
+
 const main = new Man.Main();
 
 // Create four vectors that will be chained end-to-start
@@ -359,17 +358,17 @@ function anim(delta) {
     // === Trace the motion ===
 
     // Add the end point of vec4 to the path
-    path.points.push(vec4.point[2]);
-    path.points.push(vec4.point[3]);
+    path.points.push(vec4.point[2]);// x
+    path.points.push(vec4.point[3]);//y
 
     // Assign color based on i (animated hue)
-    // NOTE: hsla's S (saturation) parameter is **ignored** in Man engine
+    // NOTE: hsla's S (saturation) parameter is **broken** in Man engine so keep it 1 
     path.color.push(main.hsla(i * 20, 1, 0.5, 1));
 
     // === Decay Effect ===
 
     // Gradually reduce alpha of earlier path points to create a fading trail
-    for (let k = 0; k < j; k++) {
+    for (let k = 0; k < j; k++) {//each frame the number j increases so the number of pixels decaying increases
         path.color[k][3] -= 1 / 255; // reduce alpha
     }
 
@@ -395,15 +394,18 @@ function anim(delta) {
         j--;                    // decay index should follow
     }
 
-    // Log time delta between frames (useful for debugging performance)
+    // Log time delta between frames (for testing performance )
     console.log(delta);
 }
 
 // Add the animation process and start
 main.addProcess([anim, 0, undefined]);
 main.refresh();
-*/
+// note that you can add multiple function in process even overlaping or even starting at the same time no delays (unless browser)
+
 /*
+//section 10
+ 
 const main = new Man.Main(); // Initialize the drawing engine
 
 // Create a pixel canvas (200×260 pixels), centered at [0,0]
@@ -418,7 +420,7 @@ function loop(x, y) {
 
     // Use a formula to generate a changing color based on pixel position and time
     // main.hsla(hue, saturation, lightness, alpha)
-    // NOTE: saturation = 1 is always forced in this engine (others are ignored)
+    // NOTE: saturation = 1 is always forced in this engine (others are almost no diffrence)
     vis.currentPixelColor = main.hsla((y + 2 * x) * 360 / 460 + i, 1, 1, 255);
     // Explanation:
     // (y + 2x): creates diagonal color gradient
@@ -438,7 +440,8 @@ function anim(delta) {
 main.addProcess([anim, 0, 10000]);
 main.refresh(); // Start the rendering loop
 */
-/*
+
+ /*
 // Visualizing a density function: density = y * cos(x * y)
 const main = new Man.Main();
 const vis = new Man.PixelMod(main, 200, 200, [0, 0]);
@@ -451,8 +454,8 @@ function loop(x, y) {
     // We multiply by 360/200 to scale y values to fit into hue range
     // We subtract from 360 to reverse the colors so high density values get red,
     // and low values get blue/green. This inversion is for better visual contrast.
-    const density = y * Math.cos(x * y);
-    const hue = 360 - density * 360 / 200;
+    let density = y * Math.cos(x * y);
+    let hue = 360 - density * 360 / 200;
 
     // Set pixel color using HSLA:
     // hue = calculated from density,

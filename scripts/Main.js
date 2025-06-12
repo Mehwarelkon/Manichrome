@@ -4,6 +4,15 @@ export class Main {//the main class is the canvas that get drawn on
         document.body.appendChild(this.canv);
         this.canv.width=window.innerWidth;
         this.canv.height=window.innerHeight;
+        //
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.height = '100%';
+        
+        document.documentElement.style.overflow = 'hidden';
+        document.documentElement.style.height = '100%';        
+        //
         this.ctx=this.canv.getContext("2d");
         this.funcs=[];//this varible will hold the bodies that will be excuted
         this.running=[];//this variable holds the bodies that are being excuted 

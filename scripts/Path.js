@@ -19,7 +19,6 @@ export class LinearPath{
             this.main.ctx.strokeStyle=`rgba(`+this.color[i/2][0]+`,`+this.color[i/2][1]+`,`+this.color[i/2][2]+`,`+this.color[i/2][3]+`)`;
             this.main.lineWidth=this.thick; 
             this.main.ctx.stroke();
-            
         }
     }
 }

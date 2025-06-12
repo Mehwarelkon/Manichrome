@@ -9,15 +9,14 @@ export * from './Sprite.js';
 export * from './Vector.js';
 export * from './Path.js';
 export * from './Grid.js';
-export * from './Graph.js'
+export * from './Graph.js';
+export * from './EventListener.js';
 
 class mainClear{
     
 }
-class graph{
-    
-}
-//[grid,graph,rect,polygon,Vector,Text,Latex]
+
+//[polygon,Text,Latex]
 /*
 
 
