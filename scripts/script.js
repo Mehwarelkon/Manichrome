@@ -1,4 +1,15 @@
 import * as Man from './Manichrome.js';
+/*
+function f(x){//this will be the graph function
+   return x**2;
+}
+const main=new Man.Main();//make canvas
+const grid=new Man.Grid(main,50,50,1)//we create a grid with 50px 50 px margins and divisions of 1
+const graph=new Man.LinearGraph(main,f,[-5,5],100,100)//we make a graph we paa main ,f(x),[startX,endX],xMargin,yMargin
+graph.inc=0.1;//change increment for smoother approximation 
+grid.draw();
+graph.draw();
+*/
 /*var i=0;
 function f(x){
     return (x**2)*i;
@@ -36,39 +47,38 @@ main.refresh();
 */
 /*
 const main =new Man.Main();
-const dot =new Man.Dot(main,[0,0]);
+const dot =new Man.Dot(main,[0,0]);//we create two dots 
 const dot2 =new Man.Dot(main,[30,30]);
-const event =new Man.EventListener(main);
+const event =new Man.TouchEventListener(main);//we create an event listener 
 event.dots.push(dot);
-event.dots.push(dot2);
+event.dots.push(dot2);//we push the two dot to be draggable
 dot.size=10;
 dot2.size=10;
-event.call();
+event.call();//we call to start
+//the toch will snap to the nearest dot 
+//event listners only works with dots
 function anim(delta){
     dot.draw();
-    dot2.draw();
-   // console.log(dot.drag)
+    dot2.draw();//here we show then
 }
 main.addProcess([anim,0,undefined]);
 main.refresh();
 */
 /*
 const main =new Man.Main();
-const dot =new Man.Dot(main,[100,100]);
+const dot =new Man.Dot(main,[100,100]);//we create a dot
 const line =new Man.Line(main,[0,0,100,100])
 const event =new Man.TouchEventListener(main);
 event.dots.push(dot);
 line.thick=2;
-event.fun=(e)=>{
-    line.point[2]=dot.point[0];
+event.fun=(e)=>{//this function apply when the touch is moving (one finger only like when the dot moves)
+    line.point[2]=dot.point[0];//we can update line in anim but this is better for delays
     line.point[3]=dot.point[1];
 };
 event.call();
 function anim(delta){
     dot.draw();
     line.draw();
-    //console.log(delta);
-   // console.log(dot.drag)
 }
 main.addProcess([anim,0,undefined]);
 main.refresh();
@@ -86,12 +96,13 @@ function anim(delta){
     V+=F;
     dot.point[0]+=V;
     dot.draw();
-    vec.point[2]=Math.max(-98,Math.min(98,dot.point[0]));
+    vec.point[2]=dot.point[0];
     vec.draw();
 }
 main.addProcess([anim,0,undefined]);
 main.refresh();
 */
+
 const main=new Man.Main();
 const line=new Man.Line(main,[-100,-100,-100,-100]);
 line.makeEaseInOutAnimation([-100,-100,100,100],[255,0,0,1],5,1000,2500);
@@ -101,7 +112,7 @@ const vec =new Man.Vector(main,[100,100,100,100]);
 vec.tipSize=0;
 vec.makeEaseInOutAnimation([100,100,-100,-100],[0,0,255,1],3,3,1000,2250);
 function anim(delta){
-   // line.draw();
+   line.draw();
     vec.draw();
     console.log(vec.point[2]);
 }

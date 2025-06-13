@@ -36,7 +36,9 @@ const line1 = new Man.Line(main, [0, 0, 100, 100]);
 line1.draw(); 
 ``` 
 you should see a thin line. 
-###Section 2 animating 
+
+### Section 2 animating 
+>>>>>>> afa59f5 (update)
 where gonna learn how to make basic animations using process like functions 
 ```js
 import * as Man from './manichrome.js';
@@ -218,7 +220,11 @@ main.refresh();
  Important: Sprites should not be used statically with other objects.
  Their draw order may get overridden unless part of an animation loop.
  
+<<<<<<< HEAD
  ### Section 7 Rotation and Vectors
+=======
+ ### section 7 Rotation and Vectors
+>>>>>>> afa59f5 (update)
  ```js
  import * as Man from './manichrome.js';
  const main = new Man.Main();

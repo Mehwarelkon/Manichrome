@@ -193,7 +193,7 @@ main.refresh();
 // Their draw order may get overridden unless part of an animation loop.
 */
 /*
-//section 7
+//section 7 rotation 
  
 // Create the main canvas and engine object
 const main = new Man.Main();
@@ -305,7 +305,7 @@ for (let i = 0; i < 100; i++) {
     // Red increases gradually from 0 to 255 as i increases
     path.color.push([i * 2.55, 0, 0, 1]); // RGBA (red gradient, fully opaque)
 }
-
+//the number of colors in the array should equal to the number of x or y points in path.point
 // Create a vector (arrow) starting from (0,0) to (100,100)
 const vec = new Man.Vector(main, [0, 0, 100, 100]);
 vec.color = [255, 0, 0, 1]; // Red color, fully opaque
@@ -316,7 +316,7 @@ path.draw();
 // Draw the vector (a red arrow)
 vec.draw();
 */
-
+/*
 //section 9
 // Create the canvas context
 
@@ -402,7 +402,7 @@ function anim(delta) {
 main.addProcess([anim, 0, undefined]);
 main.refresh();
 // note that you can add multiple function in process even overlaping or even starting at the same time no delays (unless browser)
-
+*/
 /*
 //section 10
  
@@ -439,9 +439,9 @@ function anim(delta) {
 // Add the animation process to run continuously
 main.addProcess([anim, 0, 10000]);
 main.refresh(); // Start the rendering loop
-*/
 
- /*
+*/
+ 
 // Visualizing a density function: density = y * cos(x * y)
 const main = new Man.Main();
 const vis = new Man.PixelMod(main, 200, 200, [0, 0]);
@@ -467,4 +467,3 @@ function loop(x, y) {
 
 vis.loop = loop;
 vis.draw();
-*/
