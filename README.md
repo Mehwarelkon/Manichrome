@@ -1,6 +1,6 @@
-#Manichrome  
-######all these examples is in the docs.html & docs.js
-###Section 1 
+# Manichrome  
+###### all these examples is in the docs.html & docs.js
+### Section 1 
 in this section we will make a static rendering for a line  
 first we will make the html file which we will use in all of the next scripts
 ```html
@@ -66,7 +66,7 @@ main.addProcess([anim, 0, 10000 / 3]);
 // so all draw calls must be inside process functions
 main.refresh();
 ```  
-###Section 3 Other Objects & More Complex Animations 
+### Section 3 Other Objects & More Complex Animations 
 ```js
 import * as Man from './manichrome.js';
 const main = new Man.Main();
@@ -97,7 +97,7 @@ main.addProcess([anim, 0, 3000]);
 main.refresh();
 ```
 
-###Section 4 Rotation, Fading, and Multiple Objects  
+### Section 4 Rotation, Fading, and Multiple Objects  
 ```js
 import * as Man from './manichrome.js';
 const main = new Man.Main();
@@ -158,7 +158,7 @@ main.refresh();
 // note in the [func ,start, finish]
 // you can make finish = undifined for infinit loop 
 ```
-###Section 5 PixelModefyers
+### Section 5 PixelModefyers
 ```js
 import * as Man from './manichrome.js';
 var i = 0;
@@ -186,7 +186,7 @@ function frames(delta) {
 main.addProcess([frames, 0, 10000]);
 main.refresh();
 ```
-###Section 6 using Sprites
+### Section 6 using Sprites
 ```js
 import * as Man from './manichrome.js';
 const main = new Man.Main();
@@ -218,7 +218,7 @@ main.refresh();
  Important: Sprites should not be used statically with other objects.
  Their draw order may get overridden unless part of an animation loop.
  
- ###section 7 Rotation and Vectors
+ ### Section 7 Rotation and Vectors
  ```js
  import * as Man from './manichrome.js';
  const main = new Man.Main();
@@ -312,7 +312,7 @@ main.addProcess([Vect, 2000, 10000]);
 main.refresh();
  
  ```
- ###Section 8 paths
+ ### Section 8 paths
  ```js
  import * as Man from './manichrome.js';
   // section 8 static path rendring
@@ -345,7 +345,7 @@ path.draw();
 vec.draw();
 
  ```
- ###Section 9 Vector rotation Path tracing (4 vectors)
+ ### Section 9 Vector rotation Path tracing (4 vectors)
  ```js
  import * as Man from './manichrome.js';
  // Create the canvas context
@@ -425,7 +425,7 @@ function anim(delta) {
     }
 
  ```
- ###Section 10 animting on pixelMods
+ ### Section 10 animting on pixelMods
  ```js
  import * as Man from './manichrome.js';
 const main = new Man.Main(); // Initialize the drawing engine
@@ -462,7 +462,7 @@ function anim(delta) {
 main.addProcess([anim, 0, 10000]);
 main.refresh(); // Start the rendering loop
 ```
-###Section 11 using pixel mods to visualize density
+### Section 11 using pixel mods to visualize density
 D(x,y)=yCos(xy);
 
 ```js
@@ -492,7 +492,7 @@ function loop(x, y) {
 vis.loop = loop;
 vis.draw();
 ```
-###Section 12 grid and graphs 
+### Section 12 grid and graphs 
 ```js
 import * as Man from './Manichrome.js';
 function f(x){//this will be the graph function
@@ -505,7 +505,7 @@ graph.inc=0.1;//change increment for smoother approximation
 grid.draw();
 graph.draw();
 ```
-###Section 13 TouchEventListener 
+### Section 13 TouchEventListener 
 ```js
 import * as Man from './Manichrome.js';
 const main =new Man.Main();
@@ -526,7 +526,7 @@ function anim(delta){
 main.addProcess([anim,0,undefined]);
 main.refresh();
 ```
-###Section 14 moving a line
+### Section 14 moving a line
 ```js
 import * as Man from './Manichrome.js';
 const main =new Man.Main();
@@ -548,7 +548,7 @@ main.addProcess([anim,0,undefined]);
 main.refresh();
 ```
 you could also not draw the dot so it doesnt show ;
-###Section 15 
+### Section 15 
 
 ```js
 import * as Man from './Manichrome.js';
@@ -570,7 +570,7 @@ function anim(delta){
 main.addProcess([anim,0,undefined]);
 main.refresh();
  ```
- ###Sectiin 16 built in animation 
+ ### Section 16 built in animation 
  ```js
  const main=new Man.Main();
 const line=new Man.Line(main,[-100,-100,-100,-100]);
