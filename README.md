@@ -1,7 +1,7 @@
 # Manichrome  
-## 1.1.0
+## 2.0.1
 ## New
-#### changed input style into onject inputs
+#### changed input style into object inputs
 #### added more built in animation 
 #### added additional conditions in the addProcess
 
