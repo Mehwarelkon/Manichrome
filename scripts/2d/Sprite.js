@@ -1,8 +1,8 @@
 export class Sprite{
-    constructor(main,center,dir){
+    constructor({main,center,dir,scale=[1,1]}){
         this.main=main;
         this.bool=false;
-        this.scale=[1,1];
+        this.scale=scale;
         this.center=center;
         this.dir=dir;
         this.img=new Image();

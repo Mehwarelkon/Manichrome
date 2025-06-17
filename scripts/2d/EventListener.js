@@ -1,6 +1,6 @@
 
 export class TouchEventListener{
-    constructor(main){
+    constructor({main}){
         this.main=main;
         this.touch=[0,0];
         this.dots=[];

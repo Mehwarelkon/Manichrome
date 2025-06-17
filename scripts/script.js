@@ -102,19 +102,28 @@ function anim(delta){
 main.addProcess([anim,0,undefined]);
 main.refresh();
 */
-
+/*
 const main=new Man.Main();
-const line=new Man.Line(main,[-100,-100,-100,-100]);
-line.makeEaseInOutAnimation([-100,-100,100,100],[255,0,0,1],5,1000,2500);
-const vec =new Man.Vector(main,[100,100,100,100]);
-//vec.thick=0;
-//vec.color[3]=0;
-vec.tipSize=0;
-vec.makeEaseInOutAnimation([100,100,-100,-100],[0,0,255,1],3,3,1000,2250);
-function anim(delta){
-   line.draw();
-    vec.draw();
-    console.log(vec.point[2]);
+const g=new Man.Grid({main:main,thick:3,dThick:30})
+const p=new Man.LinearPath({main:main,thick:2});
+for(let i=0;i<=(2)*Math.PI;i+=Math.PI/120){
+    p.points.push([100*Math.cos(i),Math.sin(i)*100]);
+    p.color.push([0,0,0,1]);
 }
-main.addProcess([anim,1000,10000]);
+p.points.push([100*Math.cos(0),Math.sin(0)*100]);
+p.color.push([0,0,0,1]);
+const l= new Man.Line({main:main,point1:[0,0],point2:[100,100]})
+l.makeAnimation({startTime:1000,endTime:3000,point1:[100,0],point2:[0,100]});
+//console.log(p.points[p.points.length-1]);
+p.makeAnimation({startTime:1000,endTime:3000,type:"linear"});
+function anim(delta){
+    g.draw()
+  p.draw();
+l.draw();
+    console.log(delta)
+ }
+main.addProcess([anim,1000,6000,{con:false}]);
 main.refresh();
+*/
+
+const main =new Man.Main3d();

@@ -1,6 +1,6 @@
 
 export class PixelMod{
-    constructor(main,width,height,center){
+    constructor({main,width,height,center}){
         this.main=main;
         this.center=center;
         this.width=width;

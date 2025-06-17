@@ -1,13 +1,13 @@
 export class LinearGraph{
-    constructor(main,func,domain,px,py){
+    constructor({main,func,dom,px=50,py=50,inc=0.1,color=[0,0,0,1],thick=2}){
         this.func=func;//function f(x){return}
-        this.dom=domain;//[0,20]
+        this.dom=dom;//[0,20]
         this.px=px;//the grid's px'
         this.py=py;
         this.main=main;
-        this.inc=0.5;//increment
-        this.color=[0,0,0,1];
-        this.thick=2;}
+        this.inc=inc;//increment
+        this.color=color;
+        this.thick=thick;}
     
     draw(){
         this.main.ctx.beginPath();
@@ -19,5 +19,6 @@ export class LinearGraph{
         this.main.ctx.lineWidth=this.thick;
         this.main.ctx.stroke();
     }
+    makeAnimation(){}
 }
 

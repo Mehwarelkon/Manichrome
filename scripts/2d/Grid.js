@@ -1,14 +1,14 @@
 export class Grid{
-    constructor(main,pX,pY,deviders){
+    constructor({main,px=50,py=50,d=0,axisColor=[0,0,0,1],axisThick=2,color=[0,0,0,1],thick=1,dThick=0.3}){
         this.main=main;
-        this.px=pX;
-        this.py=pY;
-        this.d=deviders;
-        this.axisColor=[0,0,0,1];
-        this.axisThick=2;
-        this.color=[0,0,0,1];
-        this.thick=1;
-        this.dThick=0.3;
+        this.px=px;
+        this.py=py;
+        this.d=d;//devidor
+        this.axisColor=axisColor;
+        this.axisThick=axisThick;
+        this.color=color;
+        this.thick=thick;
+        this.dThick=dThick;
     }
     draw(){
         //axis

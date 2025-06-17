@@ -1,5 +1,6 @@
-export class Main {//the main class is the canvas that get drawn on 
+export class Main2d {//the main class is the canvas that get drawn on 
     constructor(){
+        //this.c;
         this.canv=document.createElement("canvas");
         document.body.appendChild(this.canv);
         this.canv.width=window.innerWidth;
@@ -50,13 +51,17 @@ export class Main {//the main class is the canvas that get drawn on
             fn[0](this.delta);
         }
        for(let i=this.running.length-1;i>=0;i--){
-            if(performance.now()-cur>=this.running[i][2]){
+            if(performance.now()-cur>this.running[i][2]){
                 this.running.splice(i,1)
             }
+           if(this.running[i]?.[3]?.con){
+               this.running.splice(i,1)
+           }
         }
     }
     refresh(){//this just calls process every frame (user should call it at the end of the animtion)
         var cur =performance.now();
+        //this.c=cur;
         this.current =performance.now();
         const loop = () =>{
             this.process(cur);
