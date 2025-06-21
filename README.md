@@ -1,5 +1,5 @@
 # Manichrome  
-![Logo](script/utils/manichrome.logo.png)
+![Logo](scripts/utils/manichrome.logo.png)
 
 
 
