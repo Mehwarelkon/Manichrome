@@ -643,3 +643,7 @@ main.addProcess([anim,0,2000]);
 main.compile(2000,20,"framy.zip");//insead of calling refresh you call compile
 ```
 it will soon be bundled to the lib ___fflate___ but for now you have to add it by CDN 
+
+
+
+
