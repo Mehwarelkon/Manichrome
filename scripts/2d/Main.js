@@ -104,5 +104,78 @@ export class Main2d {//the main class is the canvas that get drawn on
         }
         
     }
+    processC(t,fps){
+        this.ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+        while(true){
+            if(this.funcs[0]===undefined){break;}
+            else if(t >= this.funcs[0][1]/fps){this.running.push(this.funcs.shift())}
+            else{break;}
+        }
+        for(const fn of this.running){
+            fn[0](1000/fps);
+        }
+       for(let i=this.running.length-1;i>=0;i--){
+            if(t >this.running[i][2]/fps){
+                this.running.splice(i,1)
+            }
+           if(this.running[i]?.[3]?.con){
+               this.running.splice(i,1)
+           }
+        }
+    }
+    compile(endTime, fps, name = "frames.zip") {
+    if (!window.fflate) {
+        console.error("fflate not found. Please include fflate.min.js.");
+        return;
+    }
+
+    const totalFrames = Math.floor((fps * endTime) / 1000);
+    const zipEntries = {};
+    const zipOptions = { level: 0 }; // No compression for faster zip
+
+    let t = 0;
+
+    const next = () => {
+        if (t >= totalFrames) {
+            // All frames added → create ZIP
+            window.fflate.zip(zipEntries, zipOptions, (err, zipped) => {
+                if (err) {
+                    console.error("ZIP error:", err);
+                    return;
+                }
+
+                const blob = new Blob([zipped], { type: "application/zip" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = name;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            });
+            return;
+        }
+
+        // Process animation logic
+        this.processC(t, fps);
+
+        // Get canvas PNG
+        this.canv.toBlob(blob => {
+            if (!blob) return next(); // Skip if failed
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                const uint8 = new Uint8Array(reader.result);
+                const fileName = `frame_${String(t).padStart(4, '0')}.png`;
+                zipEntries[fileName] = [uint8];
+                t++;
+                next(); // Next frame
+            };
+            reader.readAsArrayBuffer(blob);
+        }, 'image/png');
+    };
+
+    next(); // Start
+}
+    
 }
 
