@@ -1,18 +1,4 @@
-console.log("script.js is running!");
-
 import * as Man from './Manichrome.js';
-const main =new Man.Main2d();
-const bg=new Man.Rect({main:main,width:window.innerWidth,height:window.innerHeight,isLine:false,isFilled:true,fillColor:[0,230,230,1],center:[0,0]})
-const l=new Man.Line({main:main,point1:[0,0],point2:[200,200],thick:5})
-function anim(delta){
-    bg.draw();
-    l.point2[1]-=delta/10;
-    l.draw();
-}
-main.addProcess([anim,0,2000]);
-//main.refresh();
-main.compile(2000,20,"framy.zip");
-
 /*
 function f(x){//this will be the graph function
    return x**2;
@@ -140,3 +126,4 @@ main.addProcess([anim,1000,6000,{con:false}]);
 main.refresh();
 */
 
+const main =new Man.Main3d();
