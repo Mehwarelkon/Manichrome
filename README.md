@@ -3,12 +3,9 @@
 
 
 
-## 2.0.1
+## 2.1.0
 ## New
-#### changed input style into object inputs
-#### added more built in animation 
-#### added additional conditions in the addProcess
-
+####added downloadability with compressed pngs 
 
 ###### all these examples is in the docs.html & docs.js
 ### Section 1 
@@ -624,3 +621,25 @@ main.refresh();
 ```
  these animations apply to most object and can be stacked like animate point1 linear but point 2 easeIn
 type can be [linear,easeIn,easeOut,easeInOut,easeInSin,easeInOutSin,easeOutSin] 
+
+## Section 17 download
+first we need to add the fflate 
+```html
+<script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
+```
+
+```js
+import * as Man from './Manichrome.js';
+const main =new Man.Main2d();
+const bg=new Man.Rect({main:main,width:window.innerWidth,height:window.innerHeight,isLine:false,isFilled:true,fillColor:[0,230,230,1],center:[0,0]})
+const l=new Man.Line({main:main,point1:[0,0],point2:[200,200],thick:5})
+function anim(delta){
+    bg.draw();
+    l.point2[1]-=delta/10;
+    l.draw();
+}
+main.addProcess([anim,0,2000]);
+//main.refresh();
+main.compile(2000,20,"framy.zip");//insead of calling refresh you call compile
+```
+it will soon be bundled to the lib ___fflate___ but for now you have to add it by CDN 
