@@ -3,11 +3,13 @@
 
 
 
-## 2.1.0
+## 2.1.1
 ## New
-####added downloadability with compressed pngs 
-
-###### all these examples is in the docs.html & docs.js
+## made fflate auto imported by importing manichrome;
+## this library uses
+### canvas 2d API
+### fflate
+###### all these examples is in the docs.html & scripts/docs.js
 ### Section 1 
 in this section we will make a static rendering for a line  
 first we will make the html file which we will use in all of the next scripts
@@ -623,10 +625,7 @@ main.refresh();
 type can be [linear,easeIn,easeOut,easeInOut,easeInSin,easeInOutSin,easeOutSin] 
 
 ## Section 17 download
-first we need to add the fflate 
-```html
-<script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
-```
+you do not need to import the fflate module;
 
 ```js
 import * as Man from './Manichrome.js';

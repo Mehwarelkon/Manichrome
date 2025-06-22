@@ -437,7 +437,8 @@ function loop(x, y) {
 }
 
 vis.loop = loop;
-vis.draw();*/
+vis.draw();
+*/
 /*
 //Section 12
 function f(x){//this will be the graph function
@@ -526,4 +527,44 @@ function anim(delta){
 main.addProcess([anim,1000,10000]);
 main.refresh(); 
 
+*/
+/*
+//Section 17
+const main =new Man.Main2d();
+const bg=new Man.Rect({main:main,width:window.innerWidth,height:window.innerHeight,isLine:false,isFilled:true,fillColor:[0,230,230,1],center:[0,0]})
+const l=new Man.Line({main:main,point1:[0,0],point2:[200,200],thick:5})
+function anim(delta){
+    bg.draw();
+    l.point2[1]-=delta/10;
+    l.draw();
+}
+main.addProcess([anim,0,2000]);
+//main.refresh();
+main.compile(2000,20,"framy.zip");//instead of refresh we call compile
+//compile isnt at runtime it calculates all processes and then after it download a zip file of pngs (not video)
+//compile(endTime,fps,fileName)
+*/
+/*
+//Section 18 
+const main=new Man.Main2d();
+const g=new Man.Grid({main:main,thick:3,dThick:30})
+const p=new Man.LinearPath({main:main,thick:2});
+for(let i=0;i<=(2)*Math.PI;i+=Math.PI/120){
+    p.points.push([100*Math.cos(i),Math.sin(i)*100]);
+    p.color.push([0,0,0,1]);
+}
+p.points.push([100*Math.cos(0),Math.sin(0)*100]);
+p.color.push([0,0,0,1]);
+const l= new Man.Line({main:main,point1:[0,0],point2:[100,100]})
+l.makeAnimation({startTime:1000,endTime:3000,point1:[100,0],point2:[0,100]});
+//console.log(p.points[p.points.length-1]);
+p.makeAnimation({startTime:1000,endTime:3000,type:"linear"});
+function anim(delta){
+    g.draw()
+  p.draw();
+l.draw();
+    console.log(delta)
+ }
+main.addProcess([anim,1000,6000,{con:false}]);
+main.refresh();
 */

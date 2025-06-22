@@ -1,28 +1,9 @@
 console.log("script.js is running!");
 
-import * as Man from './Manichrome.js';
-const main =new Man.Main2d();
-const bg=new Man.Rect({main:main,width:window.innerWidth,height:window.innerHeight,isLine:false,isFilled:true,fillColor:[0,230,230,1],center:[0,0]})
-const l=new Man.Line({main:main,point1:[0,0],point2:[200,200],thick:5})
-function anim(delta){
-    bg.draw();
-    l.point2[1]-=delta/10;
-    l.draw();
-}
-main.addProcess([anim,0,2000]);
-//main.refresh();
-main.compile(2000,20,"framy.zip");
+
 
 /*
-function f(x){//this will be the graph function
-   return x**2;
-}
-const main=new Man.Main();//make canvas
-const grid=new Man.Grid(main,50,50,1)//we create a grid with 50px 50 px margins and divisions of 1
-const graph=new Man.LinearGraph(main,f,[-5,5],100,100)//we make a graph we paa main ,f(x),[startX,endX],xMargin,yMargin
-graph.inc=0.1;//change increment for smoother approximation 
-grid.draw();
-graph.draw();
+
 */
 /*var i=0;
 function f(x){
