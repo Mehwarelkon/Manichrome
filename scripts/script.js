@@ -120,4 +120,9 @@ l.draw();
 main.addProcess([anim,1000,6000,{con:false}]);
 main.refresh();
 */
-
+/*
+x1D544;  𝕄 
+&#x1D4DC;  𝓜 
+&#x2133;  /* ℳ 
+&#x1D578; /* 𝕸 
+*/ 
