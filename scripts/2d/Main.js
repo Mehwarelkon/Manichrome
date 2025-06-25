@@ -176,6 +176,9 @@ export class Main2d {//the main class is the canvas that get drawn on
 
     next(); // Start
 }
-    
+    save(entity){
+        const {main, ...obj}=entity;
+        return JSON.stringify(obj);
+    }
 }
 

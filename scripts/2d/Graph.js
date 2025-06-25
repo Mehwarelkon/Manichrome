@@ -1,5 +1,6 @@
+import {Color,Vec2} from './DataTypes.js'
 export class LinearGraph{
-    constructor({main,func,dom,px=50,py=50,inc=0.1,color=[0,0,0,1],thick=2}){
+    constructor({main,func,dom,px=50,py=50,inc=0.1,color=Color(0,0,0,1),thick=2}){
         this.func=func;//function f(x){return}
         this.dom=dom;//[0,20]
         this.px=px;//the grid's px'
@@ -15,7 +16,7 @@ export class LinearGraph{
         for(let i =this.dom[0]+this.inc;i<=this.dom[1];i+=this.inc){
             this.main.ctx.lineTo(i*this.px+window.innerWidth/2,-this.func(i)*this.py+window.innerHeight/2);
     }
-        this.main.ctx.strokeStyle=`rgba(`+this.color[0]+`,`+this.color[1]+`,`+this.color[2]+`,`+this.color[3]+`)`;
+        this.main.ctx.strokeStyle=this.color.getColor();
         this.main.ctx.lineWidth=this.thick;
         this.main.ctx.stroke();
     }

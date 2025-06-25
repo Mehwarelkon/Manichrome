@@ -11,7 +11,7 @@ export * from './2d/Path.js';
 export * from './2d/Grid.js';
 export * from './2d/Graph.js';
 export * from './2d/EventListener.js';
-
+export * from './2d/DataTypes.js';
 class mainClear{
     
 }

@@ -1,11 +1,271 @@
 # Manichrome  
 ![Logo](scripts/utils/manichrome.logo.jpg)
+### manichrome  
+is a js web based library that uses canvas 2d API and other 
+to create a user friendly manim like math animations and visuals
+in this file we will learn the basics of this library and its potintial
+
+# importing 
+to import manichrome you need to find manichrome location 
+###### manichrome-main/scripts/manichrome
+ then you will first add it to the html as a global variable 
+becuse some dependinces are initialized that way 
+and you also import it in js 
+```js
+import * as Man from './Manichrome.js';
+```
+or if you want spacific elements 
+```js
+import {Circle,Vec2,Line} from './Manichrome.js';
+```
+# Main2d
+ the Main2d is the Canvas and schedual system 
+ it simply create a canvas and handle the process system for animation
+ to create one simply 
+ ```js
+ const main = new Man.Main2d();
+ ```
+ if you have manichrome as Man
+ it has methods like 
+
+ ###addProcess(body
+ )=>here you add your function that will be processed every frame
+ 
+ ### refresh() 
+ => this is the entry point of the animation
+ ### hsla(h,s,l,a)
+ => its supposed to turn hsla to rgba it does but saturation doesnt work as intended
+
+ ### compile()
+ => this compiles the animation into zip of pngs
+ 
+ # Line 
+ Line is a class that creates a line and handle its properties
+ its initialized as Line({main,point1,point2,thick,color})
+ it has defults of 
+ thick=2 ; color:Color(0,0,0,1)
+ it has properties of 
+ ### draw()
+ => this draws the actual line
+ ### update(r,theta)
+ => this update the line to be a r length and angle theta around the point1
+ ### getLength()
+ => this returns the length of the line 
+ ### makeAnimation({point1,point2,thick,color,startTime,endTime,type})
+ => this creates an animation at a start time and end time 
+ any line property not added to the method wont get animated (wont throw an error)
+ type is defulted to "linear"
+ type can be (linear easeIn easeOut easeInOut easeInSin easeOutSin easeInOutSin)
+# Circle
+Circles are same as line 
+they have properties that get modefyied 
+Circle({main,center,r,startAngle,endAngle,thick,lineColor,isLine,fillColor,isFilled,isClosed});
+defults are 
+center=Vec2(0,0)
+r=100
+startAngle=0
+endAngle=2*Math.PI
+thick=1
+lineColor=Color(0,0,0,1)
+fillColor=Color(255,0,0,1)
+isLine=true
+isFilled=false
+isClosed=false
+it has methods of 
+### draw()
+=> draws the circle 
+### makeAnimation({center,r,startAngle,endAngle,thick,lineColor,fillColor,startTime,endTime,type})
+=> the same as line amd type is defulted to linear
+# Dot
+the dot class constructor parameter is 
+({main,point,color,size})
+they defult to 
+color=Color(0,0,0,1); size=2
+its methods are 
+### draw()
+=>this is what draw is on the canvas 
+### makeAnimation({startTime,endTime,size,color,point,type})
+=>it creates an animation from the current properties to the new desired ones
+type defults to linear 
+# Grid
+grid's constructor parameters are 
+({main,px,py,d,axisColor,axisThick,color,thick,dthick})
+=> px ,py are how much pixel for each real x increment 
+=> d are the devidors (1 for half 2 for thirds etc)
+=> thick is the thickness of the grid aside from devidors and axis
+=> color affects the non axis grid (even the devidors)
+=> dthick is the thickness of the devidors
+they defults to 
+=>px=50
+=>py=50
+=>d=0
+=>axisColor=Color(0,0,0,1)
+=>axisThick=2
+=>color=Color(0,0,0,1)
+=>thick=1
+=>dThick=0.3
+Grid has a property of 
+### draw()
+=>it simply draws the grid
+
+# LinearGraph
+its constructor parameters are 
+({main,px,py,color,thick,func,domi,inc)
+they defult to 
+=>px=50
+=>py=50
+=>inc=0.1
+=>color=Color(0,0,0,1)
+=>thick=2
+### how to use 
+you create it you make a function `f(x){return x**2}` or any other function 
+you can then add it to the constructor 
+`const g =new Man.LinearGraph({.....func=f})`
+or you can keep it undefined and before drawing 
+`g.func=f`
+you can also use arrow functions etc
+
+dom is the domaine it has two values [a,b] 
+these are x numbers not pixels 
+you can also change inc which is the increment of x make it smaller for smoother curve (defult is fine)
+then you call the method 
+### draw()
+=> it draws the graph
+
+# LinearPath()
+the path constructor's parameters are 
+({main,thick,points,color})
+they defult to 
+=>thick=2
+=>points=[]
+=>color=[]
+### how to use
+it porefeed to let color and points empty as defult 
+then you create a loop or manully add the color and points 
+point are lists of Vec2() and color are also list or Color() the number of color must be equal (or greater ) than the number of points 
+point must at least equal 2 or higher 
+then you use the property 
+### draw()
+=> draw it 
+it also has a 
+### makeAnimation({startTime,endTime,type})
+=> this simple animate the end of the path like entring the scene 
+type defults to "linear"
+
+# PixelMod
+Pixel mode is a short for pixel modefyier
+it simply gives you the controll of each pixel in the rectangle starting from [0,0]
+to [width-1,height-1]
+its parameters are ({main,width,height,center})
+it has other properties that we will talk about
+### how to use 
+after declaring the class ovject as pixel ex
+you first create a function loop(x,y) =>you can use arrow function
+like this 
+```js
+function loop(x,y){
+pixel.currentPixelColor=Color(x,0,0,y,1)
+}
+```
+then you add it 
+`pixel.loop=loop`
+and then you call the draw method 
+`pixel.draw()
+## note 
+=> alpha in rgba is 0=> 255 not 1 
+# Rect
+Rec => short for Rectangle 
+({main,width,height,center,lineColor,fillColor,thick,isLine,isFilled,theta})
+with defults of 
+=>lineColor=Color(0,0,0,1)
+=>fillColor=Color(0,0,0,1)
+=>thick=2
+=>isLine=true
+=>isFilled=false
+=>theta=0
+theta is just to tilt the Rectangle
+it has methods of 
+### makeAnimation({width,height,center,lineColor,fillColor,thick,theta,startTime,endTime,type})
+=> as always it creates an animation for your object 
+### draw()
+ot draws the rect it self 
+
+# Sprite
+parameters ({main,center,dir,scale})
+scale defult to [1,1]
+dir is the directory to your image relative to your html
+ ###### note 
+ => sprites may not be drawn at order if staticlly 
+ => so they should be drawn in an animation or process
+ # Triangle
+ 's parameters are 
+ ({main,point1,point2,point3,lineColor,fillColor,thick,isLine,isFilled,theta})
+they defults to 
+lineColor=Color(0,0,0,1)
+=>fillColor=Color(0,0,0,1)
+=>thick=2
+=>isLine=true
+=>isFilled=false
+=>theta=0
+it has methods of 
+### draw(point)
+=> it draws it and rotates by theta arround point
+there is no make animation for now but soon 
+# Vector 
+its parameter are ({main,point1,point2,color,thick,tipSize})
+they defaults to 
+=>color=Color(0,0,0,1)
+=>thick=2
+=>tipSize=3
+it has methods of 
+### draw()
+=> draw the vector 
+### makeAnimation({tipSize,point1,point2,thick,color,startTime,endTime,type})
+=>creates an animation 
+=> type defults to linear 
+### update(r,angle)
+=> update point2 on r, angle,point1
+
+# Data types 
+data types consist of two custom types
+#Vec2(x,y)
+=> this is an array of two numbers thats has methods of 
+=> its immutable so methods retuen new Vec2 not modify the original
+### add(vec)
+=> it add the two vectors 
+### dot(vec)
+=> the dot product 
+### cross(vec)
+=> the cross product 
+### mul(scalar)
+=> multiply the vector by the scalar 
+### getLength()
+=> returns the length of the vector
+### normalize()
+=> normalize the vector 
+### equal(vec)
+=> returns a bool value after checking if the two are equal 
+### getAngle()
+=> returns the angle of the vector 
+### getAngleTo(vec)
+returns the angle relative to vec _with sign_
+### sub(vec)
+=>subtract the two 
+### rot(vec,angle)
+=> rotates arround vec
+### isVec2(vec) _this id a property of Vec2 not a variable of it _
+=> checks if vec is an array and its length equals two 
+### clone()
+=> returns it self 
+### type 
+=> ="Vec2"
+
+# Color(r,g,b,a)
+this hlods tha color and it doesnt have properties ___for the user___ 
+but its requires for the library to work 
 
 
 
-## 2.1.1
-## New
-## made fflate auto imported by importing manichrome;
 ## this library uses
 ### canvas 2d API
 ### fflate

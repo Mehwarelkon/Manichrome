@@ -1,8 +1,9 @@
 
+import {Vec2,Color} from './DataTypes.js';
 export class Dot{
-    constructor({main,point,color=[0,0,0,1],size=2}){
-        this.point=point;
-        this.color=color;
+    constructor({main,point,color=Color(0,0,0,1),size=2}){
+        this.point=point;//Vec2
+        this.color=color;//Color
         this.size=size;
         this.main=main;
         this.drag=false;
@@ -35,15 +36,15 @@ export class Dot{
         
         
         if(point){
-            funcs.push(()=>this.point=[opoint[0]+(point[0]-opoint[0])*p(),opoint[1]+(point[1]-opoint[1])*p()]);
-            tfunc.push(()=>this.point=[...point]);
-            opoint=[...this.point];
+            funcs.push(()=>this.point=Vec2(opoint[0]+(point[0]-opoint[0])*p(),opoint[1]+(point[1]-opoint[1])*p()));
+            tfunc.push(()=>this.point=Vec2(...point));
+            opoint=Vec2(...this.point);
         }
         
         if(color){
-            funcs.push(()=>this.color=[ocolor[0]+(color[0]-ocolor[0])*p(),ocolor[1]+(color[1]-ocolor[1])*p(),ocolor[2]+(color[2]-ocolor[2])*p(),ocolor[3]+(color[3]-ocolor[3])*p()]);
-            tfunc.push(()=>this.color=[...color]);
-            ocolor=[...this.color];
+            funcs.push(()=>this.color=Color(ocolor[0]+(color[0]-ocolor[0])*p(),ocolor[1]+(color[1]-ocolor[1])*p(),ocolor[2]+(color[2]-ocolor[2])*p(),ocolor[3]+(color[3]-ocolor[3])*p()))
+            tfunc.push(()=>this.color=Color(...color));
+            ocolor=Color(...this.color);
         }
         if(size){
             funcs.push(()=>this.size=[osize+(size-osize)*p()]);

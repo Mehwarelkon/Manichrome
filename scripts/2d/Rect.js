@@ -1,5 +1,6 @@
+import {Color,Vec2} from "./DataTypes.js";
 export class Rect{
-    constructor({main,width,height,center,lineColor=[0,0,0,1],fillColor=[0,0,0,1],thick=2,isLine=true,isFilled=false,theta=0}){//center is like [x1,y1]
+    constructor({main,width,height,center,lineColor=Color(0,0,0,1),fillColor=Color(0,0,0,1),thick=2,isLine=true,isFilled=false,theta=0}){//center is like [x1,y1]
         this.main=main;
         this.width=width;
         this.height=height;
@@ -13,7 +14,7 @@ export class Rect{
         this.theta=theta;
     }
     draw(){
-        let r=Math.sqrt((this.width/2)**2+(this.height/2)**2);
+        let r=Math.hypot((this.width/2),(this.height/2));
         let phi = Math.atan2(this.height,this.width);
         
         this.main.ctx.beginPath();
@@ -24,11 +25,11 @@ export class Rect{
         this.main.ctx.closePath();
         //this.main.ctx.lineTo(this.center[0]-this.width/2 +window.innerWidth/2,-this.center[1] +this.height/2 +window.innerHeight);
         if(this.isLine){
-            this.main.ctx.strokeStyle=`rgba(`+this.lineColor[0]+`,`+this.lineColor[1]+`,`+this.lineColor[2]+`,`+this.lineColor[3]+`)`;
+            this.main.ctx.strokeStyle=this.lineColor.getColor();
             this.main.ctx.stroke();
         }
         if(this.isFilled){
-            this.main.ctx.fillStyle=`rgba(`+this.fillColor[0]+`,`+this.fillColor[1]+`,`+this.fillColor[2]+`,`+this.fillColor[3]+`)`;
+            this.main.ctx.fillStyle=this.fillColor.getColor();
             this.main.ctx.fill();
         }
     }
@@ -59,10 +60,15 @@ export class Rect{
             tfunc.push(()=>this.width=width);
             owidth=this.width;
         }
+        if(height){
+            funcs.push(()=>this.height=oheight+(height-oheight)*p());
+            tfunc.push(()=>this.height=height);
+            oheight=this.height;
+        }
         if(center){
-            funcs.push(()=>this.center=[ocenter[0]+(center[0]-ocenter[0])*p(),ocenter[1]+(center[1]-ocenter[1])*p()]);
-            tfunc.push(()=>this.center=[...center]);
-            ocenter=[...this.center];
+            funcs.push(()=>this.center= ocenter.add(center.sub(ocenter).mul(p()))  )//[ocenter[0]+(center[0]-ocenter[0])*p(),ocenter[1]+(center[1]-ocenter[1])*p()]);
+            tfunc.push(()=>this.center=center.clone());
+            ocenter=this.center.clone();
         }
         if(thick){
             funcs.push(()=>this.thick=othick+(thick-othick)*p());
@@ -70,14 +76,14 @@ export class Rect{
             othick=this.thick;
         }
         if(lineColor){
-            funcs.push(()=>this.lineColor=[olineColor[0]+(lineColor[0]-olineColor[0])*p(),olineColor[1]+(lineColor[1]-olineColor[1])*p(),olineColor[2]+(lineColor[2]-olineColor[2])*p(),olineColor[3]+(lineColor[3]-olineColor[3])*p()]);
-            tfunc.push(()=>this.lineColor=[...lineColor]);
-            olineColor=[...this.lineColor];
+            funcs.push(()=>this.lineColor=Color(olineColor[0]+(lineColor[0]-olineColor[0])*p(),olineColor[1]+(lineColor[1]-olineColor[1])*p(),olineColor[2]+(lineColor[2]-olineColor[2])*p(),olineColor[3]+(lineColor[3]-olineColor[3])*p()));
+            tfunc.push(()=>this.lineColor=Color(...lineColor));
+            olineColor=Color(...this.lineColor);
         }
         if(fillColor){
-            funcs.push(()=>this.fillColor=[ofillColor[0]+(fillColor[0]-ofillColor[0])*p(),ofillColor[1]+(fillColor[1]-ofillColor[1])*p(),ofillColor[2]+(fillColor[2]-ofillColor[2])*p(),ofillColor[3]+(fillColor[3]-ofillColor[3])*p()]);
-            tfunc.push(()=>this.fillColor=[...fillColor]);
-            ofillColor=[...this.fillColor];
+            funcs.push(()=>this.fillColor=Color(ofillColor[0]+(fillColor[0]-ofillColor[0])*p(),ofillColor[1]+(fillColor[1]-ofillColor[1])*p(),ofillColor[2]+(fillColor[2]-ofillColor[2])*p(),ofillColor[3]+(fillColor[3]-ofillColor[3])*p()));
+            tfunc.push(()=>this.fillColor=Color(...fillColor));
+            ofillColor=Color(...this.fillColor);
         }
 	if(theta){
 	funcs.push(()=>this.theta=otheta+(theta-otheta)*p());

@@ -1,4 +1,4 @@
-
+import {Color,Vec2} from './DataTypes.js';
 export class PixelMod{
     constructor({main,width,height,center}){
         this.main=main;
