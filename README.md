@@ -269,6 +269,7 @@ but its requires for the library to work
 ## this library uses
 ### canvas 2d API
 ### fflate
+<!--
 ###### all these examples is in the docs.html & scripts/docs.js
 ### Section 1 
 in this section we will make a static rendering for a line  
@@ -904,3 +905,4 @@ main.compile(2000,20,"framy.zip");//insead of calling refresh you call compile
 it will soon be bundled to the lib ___fflate___ but for now you have to add it by CDN 
 
 
+  -->
