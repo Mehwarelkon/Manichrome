@@ -269,7 +269,7 @@ but its requires for the library to work
 ## this library uses
 ### canvas 2d API
 ### fflate
-<!--
+
 ###### all these examples is in the docs.html & scripts/docs.js
 ### Section 1 
 in this section we will make a static rendering for a line  
@@ -291,7 +291,6 @@ first we will make the html file which we will use in all of the next scripts
 ``` 
 seconde we will make the js part  
 ```js
-import * as Man from './manichrome.js';
 // Section 1: Static Rendering
 // This example shows how to render a simple static image using Manichrome.
 
@@ -300,7 +299,7 @@ import * as Man from './manichrome.js';
 const main = new Man.Main2d(); 
 
 // Step 2: Create a line from (0, 0) to (100, 100)
-const line1 = new Man.Line({main:main,point1:[0,0],point2:[100,100],thick:2,color:[255,0,0,1]});
+const line1 = new Man.Line({main:main,point1:Man.origin,point2:Man.Vec2(100,100),thick:2,color:Man.Color(0,0,255,1)});
 
 // Step 3: Draw the line on the canvas
 line1.draw(); 
@@ -314,11 +313,10 @@ where gonna learn how to make basic animations using process like functions
 //Section 2
 import * as Man from './manichrome.js';
 // This example shows how to animate a line using Manichrome
-
 const main = new Man.Main2d();
 
 // Create a line from (0, 0) to (100, 100)
-const line1 = new Man.Line({main:main, point1:[0, 0],point2:[100,100]});
+const line1 = new Man.Line({main:main, point1:Man.Vec2(0,0),point2:Man.Vec2(100,100)});
 
 // Define the animation function (called every frame)
 function anim(delta) {//delta is time of the frame 
@@ -326,7 +324,6 @@ function anim(delta) {//delta is time of the frame
     
     line1.point2[1] -= 100*delta/(10000/3);
 }
-3.3
 // Add the animation to the process list
 // Format: [function, startTime(ms), endTime(ms)]
 // Note: animation functions should take no parameters
@@ -340,14 +337,13 @@ main.refresh();
 ### Section 3 Other Objects & More Complex Animations 
 ```js
 import * as Man from './manichrome.js';
-//Section 3
 const main = new Man.Main2d();
 
 // Create a line from (0, 0) to (60, 80)
-const line1 = new Man.Line({main:main,point1:[0,0],point2:[60,80]});
+const line1 = new Man.Line({main:main,point1:Man.Vec2(0,0),point2:Man.Vec2(60,80)});
 
 // Create a circle centered at (0, 0) with radius 100 and full angle (2π)
-const cir = new Man.Circle({main:main,center:[0,0],r:100});
+const cir = new Man.Circle({main:main,center:Man.Vec2(0,0),r:100});
 
 
 let i = 0;
@@ -377,10 +373,10 @@ import * as Man from './manichrome.js';
 const main = new Man.Main2d();
 
 // Create basic objects
-const line = new Man.Line({main:main,point1:[200,0],point2:[100,0]}); // A line from (200,0) to (100,0)
-const cir = new Man.Circle({main:main,center:[0,0],r:100}); // circle({main,center,r,startAngle,endAngle,thick,lineColor,isLine,isClosed,isFilled,fillColor}))
-const rect = new Man.Rect({main:main,width:160,height:120,center:[0,0],isFilled:true,fillColor:[0,0,0,0]}); // Rectangle centered at (0,0)
-const dot = new Man.Dot({main:main,point:[100,0]}); // Dot starting at (100,0)
+const line = new Man.Line({main:main,point1:Man.Vec2(200,0),point2:Man.Vec2(100,0)}); // A line from (200,0) to (100,0)
+const cir = new Man.Circle({main:main,center:Man.origin,r:100}); // circle({main,center,r,startAngle,endAngle,thick,lineColor,isLine,isClosed,isFilled,fillColor}))
+const rect = new Man.Rect({main:main,width:160,height:120,center:Man.origin,isFilled:true,fillColor:Man.Color(0,0,0,1)}); // Rectangle centered at (0,0)
+const dot = new Man.Dot({main:main,point:Man.Vec2(100,0)}); // Dot starting at (100,0)
 
 // Initial setup
 let i = 0;     // Angle
@@ -389,12 +385,12 @@ let dir = true; // Direction of green fade (true = increasing)
 
 // Rectangle styling
 // Line styling
-line.color = [255, 0, 255, 1]; // Magenta
+line.color = Man.Color(255,0,255,1); // Magenta
 
 // Circle styling
 cir.isFilled = true;
-cir.fillColor = [255, 0, 0, 0.1]; // Red with low opacity
-cir.lineColor = [0, 0, 255, 1];   // Blue outline
+cir.fillColor = Man.Color(255,0,0,0.1)//[255, 0, 0, 0.1]; // Red with low opacity
+cir.lineColor = Man.Color(0,0,255,1)//[0, 0, 255, 1];   // Blue outline
 
 function anim(delta) {
     // Draw all shapes
@@ -418,10 +414,10 @@ function anim(delta) {
     rect.theta = i;
 
     // Move the dot in a circle
-    dot.point = [Math.cos(i) * 100, Math.sin(i) * 100];
+    dot.point = Man.Vec2(Math.cos(i) * 100, Math.sin(i) * 100);
 
     // Fade in/out green-filled rectangle
-    rect.fillColor = [0, j, 0, j / 255];
+    rect.fillColor = Man.Color(0,j,0,j/255)//[0, j, 0, j / 255];
 }
 
 main.addProcess([anim, 0, 10000]);
@@ -436,16 +432,16 @@ import * as Man from './manichrome.js';
 //Section 5
 var i = 0;
 const main = new Man.Main2d();
-const Pi = new Man.PixelMod({main:main,width:150,height:255,center:[0,0]}); // width=150, height=255, origin
+const Pi = new Man.PixelMod({main:main,width:150,height:255,center:Man.origin}); // width=150, height=255, origin
 
 // Set pixel color based on position and animation frame
 function P(x, y) {
-    Pi.currentPixelColor = [
+    Pi.currentPixelColor = Man.Color(
         Math.abs(Math.cos(i) * (255 - y)), // Red fades with y
         0,
         Math.abs(Math.sin(i) * y),         // Blue increases with y
         255                                // Fully opaque
-    ];
+    );
 }
 Pi.loop = P;
 
@@ -468,10 +464,10 @@ import * as Man from './manichrome.js';
 const main = new Man.Main2d();
 
 // Load a sprite image at position [0, 0]
-const spr = new Man.Sprite({main:main,center:[0,0],dir:'./scripts/THK.jpeg'});
+const spr = new Man.Sprite({main:main,center:Man.origin,dir:'./scripts/THK.jpeg'});
 
 // Create a circle centered at [0, 0] with radius 100
-const cir = new Man.Circle({main:main,center:[0,0],r:100});
+const cir = new Man.Circle({main:main,center:Man.origin,r:100});
 
 // Note: circle is not filled by default
 // cir.isFilled = true;
@@ -498,35 +494,35 @@ main.refresh();
  ### section 7 Rotation and Vectors
 
  ```js
- //Section 7
+//Section 7
 const main = new Man.Main2d();
 
 // Create a full circle centered at (0,0) with radius 100
-const cir = new Man.Circle({main:main,center:[0,0],r:100});
+const cir = new Man.Circle({main:main,center:Man.origin.clone(),r:100});
 
 // Create a horizontal line (X-axis)
-const X = new Man.Line({main:main,point1:[-200,0],point2:[200,0]});
+const X = new Man.Line({main:main,point1:Man.origin.clone(),point2:Man.origin.clone()});
 
 // Create a vertical line (Y-axis) starting and ending at offset from center
-const Y = new Man.Line({main:main,point1:[100,200],point2:[100,-200]});
+const Y = new Man.Line({main:main,point1:Man.origin.clone(),point2:Man.origin.clone()});
 
 // Create a diagonal line starting from center
-const lineA = new Man.Line({main,point1:[0,0],point2:[200,200]});
+const lineA = new Man.Line({main,point1:Man.origin.clone(),point2:Man.origin.clone()});
 
 // Create a dot placed initially at (0, 100)
-const dot = new Man.Dot({main:main,point:[0,100]});
+const dot = new Man.Dot({main:main,point:Man.origin.clone()});
 
 // Create a rectangle with width=160, height=120, centered at (0,0)
-const rect = new Man.Rect({main:main,width:160,height:120,center:[0,0]});
+const rect = new Man.Rect({main:main,width:160,height:120,center:Man.origin.clone()});
 
 // Extra dot for future use (currently unused)
-const RDot = new Man.Dot(main, [50, 0]);
+const RDot = new Man.Dot({main:main,point:Man.origin.clone()});
 
 // Create a triangle pointing upwards with its center roughly at origin
-const tri = new Man.Triangle({main:main,point1:[-80,-60],point2:[80,-60],point3:[0,100]});
+const tri = new Man.Triangle({main:main,point1:Man.origin.clone(),point2:Man.origin.clone(),point3:Man.origin});
 
 // Create a vector starting from center and pointing to the right
-const vec = new Man.Vector({main:main,point1:[0,0],point2:[100,0],tipSize:5});
+const vec = new Man.Vector({main:main,point1:Man.origin.clone(),point2:Man.origin.clone(),tipSize:5});
 
 // Initialize the animation angle variable
 let i = 0;
@@ -534,6 +530,7 @@ const step = Math.PI / 120; // Increment angle slowly for smooth motion
 
 // First animation: runs for 2 seconds
 function circle(delta) {
+   console.log(JSON.stringify(cir.center))
     // Draw all static objects
     cir.draw();
     X.draw();
@@ -559,11 +556,11 @@ function circle(delta) {
     rect.draw();
 
     // Move the dot in a circular path
-    dot.point = [Math.cos(i) * 100, Math.sin(i) * 100];
+    dot.point = Man.Vec2(Math.cos(i) * 100, Math.sin(i) * 100);
 
     // Rotate the triangle around origin
     tri.theta = i;
-    tri.draw([0,0]);
+    tri.draw(Man.Vec2(0,0));
 }
 
 // Second animation: shows after the first 2 seconds (until 10s)
@@ -603,16 +600,16 @@ const path = new Man.LinearPath({main:main});
 for (let i = 0; i <= 100; i++) {
     // Add a point (x, y) to the path
     // x = i, y = 2i => this forms a straight line with slope 2
-    path.points.push([i,2*i]);     // x-coordinate
+    path.points.push(Man.Vec2(i,2*i));     // x-coordinate
      // y-coordinate
 
     // Assign a color for each segment (makes it a gradient)
     // Red increases gradually from 0 to 255 as i increases
-    path.color.push([i * 2.55, 0, 0, 1]); // RGBA (red gradient, fully opaque)
+    path.color.push(Man.Color(i * 2.55, 0, 0, 1)); // RGBA (red gradient, fully opaque)
 }
 //the number of colors in the array should equal to the number of x or y points in path.point
 // Create a vector (arrow) starting from (0,0) to (100,100)
-const vec = new Man.Vector({main:main,point1:[0,0],point2:[100,100],color:[255, 0, 0, 1]}); // Red color, fully opaque
+const vec = new Man.Vector({main:main,point1:Man.origin.clone(),point2:Man.Vec2(100,100),color:Man.Color(255,0,0,1)}); // Red color, fully opaque
 
 // Draw the path (a red gradient line following y = 2x)
 path.draw();
@@ -625,16 +622,17 @@ vec.draw();
  ### Section 9 Vector rotation Path tracing (4 vectors)
  ```js
  import * as Man from './manichrome.js';
+
 //Section 9
 // Create the canvas context
 
 const main = new Man.Main2d();
 
 // Create four vectors that will be chained end-to-start
-const vec = new Man.Vector({main:main, point1:[0, 0],point2: [0, 0]});
-const vec2 = new Man.Vector({main:main, point1:[0, 0],point2: [0, 0]});
-const vec3 = new Man.Vector({main:main, point1:[0, 0],point2: [0, 0]});
-const vec4 = new Man.Vector({main:main, point1:[0, 0],point2: [0, 0]});
+const vec = new Man.Vector({main:main, point1:Man.origin.clone(),point2:Man.origin.clone()});
+const vec2 = new Man.Vector({main:main, point1:Man.origin.clone(),point2:Man.origin.clone()});
+const vec3 = new Man.Vector({main:main, point1:Man.origin.clone(),point2:Man.origin.clone()});
+const vec4 = new Man.Vector({main:main, point1:Man.origin.clone(),point2:Man.origin.clone()});
 
 // Create a path to trace the tip of the last vector (vec4)
 const path = new Man.LinearPath({main:main});
@@ -666,13 +664,13 @@ function anim(delta) {
     // === Trace the motion ===
 
     // Add the end point of vec4 to the path
-    path.points.push([vec4.point2[0],vec4.point2[1]]);// x
+    path.points.push(Man.Vec2(vec4.point2[0],vec4.point2[1]));// x
     //y
 
     // Assign color based on i (animated hue)
     // NOTE: hsla's S (saturation) parameter is **broken** in Man engine so keep it 1 
     path.color.push(main.hsla(i * 20, 1, 0.5, 1));
-
+  // console.log(main.hsla(0,1,1,1))
     // === Decay Effect ===
 
     // Gradually reduce alpha of earlier path points to create a fading trail
@@ -708,11 +706,12 @@ main.refresh();
  ### Section 10 animting on pixelMods
  ```js
  import * as Man from './manichrome.js';
+
 //Section 10
 const main = new Man.Main2d(); // Initialize the drawing engine
 
 // Create a pixel canvas (200×260 pixels), centered at [0,0]
-const vis = new Man.PixelMod({main:main,width:200,height:260,center:[0,0]});
+const vis = new Man.PixelMod({main:main,width:200,height:260,center:Man.Vec2(0,0)});
 
 let i = 0; // A time variable to animate colors
 
@@ -750,7 +749,7 @@ D(x,y)=yCos(xy°);
 import * as Man from './manichrome.js';
 //Section 11
 const main = new Man.Main2d();
-const vis = new Man.PixelMod({main:main,width:200,height:260,center:[0,0]});
+const vis = new Man.PixelMod({main:main,width:200,height:260,center:Man.origin.clone()});
 
 function loop(x, y) {
     // Calculate the density value at pixel (x,y) using y * cos(x*y)
@@ -762,7 +761,6 @@ function loop(x, y) {
     // and low values get blue/green. This inversion is for better visual contrast.
     let density = y * Math.cos(x * y*Math.PI/180);
     let hue = 360 - density * 360 / 200;
-
     // Set pixel color using HSLA:
     // hue = calculated from density,
     // saturation = 1 (full color),
@@ -793,8 +791,8 @@ graph.draw()
 import * as Man from './Manichrome.js';
 //Section 13
 const main =new Man.Main2d();
-const dot =new Man.Dot({main:main,point:[-50,0]});//we create two dots 
-const dot2 =new Man.Dot({main:main,point:[50,0]});
+const dot =new Man.Dot({main:main,point:Man.Vec2(-50,0)});//we create two dots 
+const dot2 =new Man.Dot({main:main,point:Man.Vec2(50,0)});
 const event =new Man.TouchEventListener({main:main});//we create an event listener 
 event.dots.push(dot);
 event.dots.push(dot2);//we push the two dot to be draggable
@@ -809,14 +807,16 @@ function anim(delta){
 }
 main.addProcess([anim,0,undefined]);
 main.refresh();
+
 ```
 ### Section 14 moving a line
 ```js
 import * as Man from './Manichrome.js';
+
 //Section 14
 const main =new Man.Main2d();
-const dot =new Man.Dot({main:main,point:[100,100]});//we create a dot
-const line =new Man.Line({main:main,point1:[0,0],point2:[100,100],thick:2})
+const dot =new Man.Dot({main:main,point:Man.Vec2(100,100)});//we create a dot
+const line =new Man.Line({main:main,point1:Man.origin.clone(),point2:Man.Vec2(100,100),thick:2})
 const event =new Man.TouchEventListener({main:main});
 event.dots.push(dot);
 event.fun=(e)=>{//this function apply when the touch is moving (one finger only like when the dot moves)
@@ -860,18 +860,17 @@ main.refresh();
  ```
  ### Section 16 built in animation 
  ```js
- const main=new Man.Main();
-//Section 16 
+ //Section 16 
 const main =new Man.Main2d();
-const line=new Man.Line({main:main,point1:[-100,-100],point2:[-100,-100]});
-line.makeAnimation({color:[255,0,0,1],thick:5,startTime:1000,endTime:3000,type:"linear"});
-line.makeAnimation({point1:[-100,-100],point2:[100,100],startTime:1000,endTime:3000,type:"easeInOutSin"});
+const line=new Man.Line({main:main,point1:Man.Vec2(-100,-100),point2:Man.Vec2(-100,-100)});
+line.makeAnimation({color:Man.Color(255,0,0,1),thick:5,startTime:1000,endTime:3000,type:"linear"});
+line.makeAnimation({point1:Man.Vec2(-100,-100),point2:Man.Vec2(100,100),startTime:1000,endTime:3000,type:"easeInOutSin"});
 
-const vec =new Man.Vector({main:main,point1:[100,100],point2:[100,100],tipSize:0});
+const vec =new Man.Vector({main:main,point1:Man.Vec2(100,100),point2:Man.Vec2(100,100),tipSize:0});
 //vec.thick=0;
 //vec.color[3]=0;
 //vec.tipSize=0;
-vec.makeAnimation({point2:[-100,-100],color:[0,0,255,1],thick:3,tipSize:3,startTime:1000,endTime:3000});
+vec.makeAnimation({point2:Man.Vec2(-100,-100),color:Man.Color(0,0,255,1),thick:3,tipSize:5,startTime:1000,endTime:3000});
 function anim(delta){
    line.draw();
     vec.draw();
@@ -879,7 +878,6 @@ function anim(delta){
 }
 main.addProcess([anim,1000,10000]);
 main.refresh(); 
-
 
 ```
  these animations apply to most object and can be stacked like animate point1 linear but point 2 easeIn
@@ -890,19 +888,27 @@ you do not need to import the fflate module;
 
 ```js
 import * as Man from './Manichrome.js';
-const main =new Man.Main2d();
-const bg=new Man.Rect({main:main,width:window.innerWidth,height:window.innerHeight,isLine:false,isFilled:true,fillColor:[0,230,230,1],center:[0,0]})
-const l=new Man.Line({main:main,point1:[0,0],point2:[200,200],thick:5})
-function anim(delta){
-    bg.draw();
-    l.point2[1]-=delta/10;
-    l.draw();
+//Section 18 
+const main=new Man.Main2d();
+const g=new Man.Grid({main:main,thick:3,dThick:30})
+const p=new Man.LinearPath({main:main,thick:2});
+for(let i=0;i<=(2)*Math.PI;i+=Math.PI/120){
+    p.points.push(Man.Vec2(100*Math.cos(i),Math.sin(i)*100));
+    p.color.push(Man.Color(0,0,0,1));
 }
-main.addProcess([anim,0,2000]);
-//main.refresh();
-main.compile(2000,20,"framy.zip");//insead of calling refresh you call compile
+p.points.push(Man.Vec2(100*Math.cos(0),Math.sin(0)*100));
+p.color.push(Man.Color(0,0,0,1));
+const l= new Man.Line({main:main,point1:Man.origin.clone(),point2:Man.Vec2(100,100)})
+l.makeAnimation({startTime:1000,endTime:3000,point1:Man.Vec2(100,0),point2:Man.Vec2(0,100)});
+//console.log(p.points[p.points.length-1]);
+p.makeAnimation({startTime:1000,endTime:3000,type:"linear"});
+function anim(delta){
+    g.draw()
+  p.draw();
+l.draw();
+    console.log(delta)
+ }
+main.addProcess([anim,1000,6000,{con:false}]);
+main.refresh();
+
 ```
-it will soon be bundled to the lib ___fflate___ but for now you have to add it by CDN 
-
-
-  -->

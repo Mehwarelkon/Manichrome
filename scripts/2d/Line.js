@@ -1,6 +1,6 @@
 import {Color,Vec2} from './DataTypes.js';
 export class Line {//point =[x1,y1,x2,y2] other non important member variables get called after initializing 
-    constructor({main,point1,point2,color=Color(0,0,0,1),thick=2}){//color is an array 
+    constructor({main,point1=Vec2(0,0),point2=Vec2(100,100),color=Color(0,0,0,1),thick=2}){//color is an array 
         this.point1=point1;//Vec2
         this.point2=point2;//Vec2
         this.Main=main;
@@ -12,10 +12,12 @@ export class Line {//point =[x1,y1,x2,y2] other non important member variables g
         this.ctx.beginPath();
         this.ctx.strokeStyle=this.color.getColor();
         this.ctx.lineWidth=this.thick
-        this.ctx.moveTo(this.point1[0]+(window.innerWidth)/2,-this.point1[1] +(window.innerHeight)/2);
-        this.ctx.lineTo(this.point2[0]+(window.innerWidth)/2,-this.point2[1] +(window.innerHeight)/2);
+        this.ctx.moveTo(this.point1[0]+(this.Main.canv.width)/2,-this.point1[1] +(this.Main.canv.height)/2);
+        this.ctx.lineTo(this.point2[0]+(this.Main.canv.width)/2,-this.point2[1] +(this.Main.canv.height)/2);
         this.ctx.stroke();
     }
+    
+    
     update(r,theta){
             this.point2=Vec2(r*Math.cos(theta),r*Math.sin(theta));
              }
@@ -77,8 +79,12 @@ makeAnimation({point1,point2,thick,color,startTime,endTime,type="linear"}){
         }//
         this.Main.addProcess([f,startTime,endTime]);
     } 
-
-    
+    bind(obj,t){
+        this.point1=obj.point1?obj.point1(t):this.point1;
+        this.point2=obj.point2?obj.point2(t):this.point2;
+        this.thick=obj.thick?obj.thick(t):this.thick;
+        this.color=obj.color?obj.color(t):this.color;
+    }
 }
 
 

@@ -1,6 +1,6 @@
 import {Color,Vec2} from "./DataTypes.js";
 export class Rect{
-    constructor({main,width,height,center,lineColor=Color(0,0,0,1),fillColor=Color(0,0,0,1),thick=2,isLine=true,isFilled=false,theta=0}){//center is like [x1,y1]
+    constructor({main,width=100,height=100,center=Vec2(0,0),lineColor=Color(0,0,0,1),fillColor=Color(0,0,0,1),thick=2,isLine=true,isFilled=false,theta=0}){//center is like [x1,y1]
         this.main=main;
         this.width=width;
         this.height=height;
@@ -18,10 +18,10 @@ export class Rect{
         let phi = Math.atan2(this.height,this.width);
         
         this.main.ctx.beginPath();
-        this.main.ctx.moveTo(this.center[0]+r*Math.cos(-Math.PI+phi+this.theta)+window.innerWidth/2,-this.center[1] -r*Math.sin(-Math.PI+phi+this.theta)+window.innerHeight/2);
-        this.main.ctx.lineTo(this.center[0]+r*Math.cos(Math.PI-phi+this.theta) +window.innerWidth/2,-this.center[1] -r*Math.sin(Math.PI-phi+this.theta) +window.innerHeight/2);
-        this.main.ctx.lineTo(this.center[0]+r*Math.cos(phi+this.theta) +window.innerWidth/2,-this.center[1] -r*Math.sin(phi+this.theta) +window.innerHeight/2);
-        this.main.ctx.lineTo(this.center[0]+r*Math.cos(-phi+this.theta) +window.innerWidth/2,-this.center[1] -r*Math.sin(-phi+this.theta) +window.innerHeight/2);
+        this.main.ctx.moveTo(this.center[0]+r*Math.cos(-Math.PI+phi+this.theta)+this.main.canv.width/2,-this.center[1] -r*Math.sin(-Math.PI+phi+this.theta)+this.main.canv.height/2);
+        this.main.ctx.lineTo(this.center[0]+r*Math.cos(Math.PI-phi+this.theta) +this.main.canv.width/2,-this.center[1] -r*Math.sin(Math.PI-phi+this.theta) +this.main.canv.height/2);
+        this.main.ctx.lineTo(this.center[0]+r*Math.cos(phi+this.theta) +this.main.canv.width/2,-this.center[1] -r*Math.sin(phi+this.theta) +this.main.canv.height/2);
+        this.main.ctx.lineTo(this.center[0]+r*Math.cos(-phi+this.theta) +this.main.canv.width/2,-this.center[1] -r*Math.sin(-phi+this.theta) +this.main.canv.height/2);
         this.main.ctx.closePath();
         //this.main.ctx.lineTo(this.center[0]-this.width/2 +window.innerWidth/2,-this.center[1] +this.height/2 +window.innerHeight);
         if(this.isLine){
@@ -104,5 +104,15 @@ export class Rect{
         }//
         this.main.addProcess([f,startTime,endTime]);
     } 
+    bind(obj,t){
+        this.center=obj.center?obj.center(t):this.center;
+        this.width=obj.width?obj.width(t):this.width;
+        this.theta=obj.theta?obj.theta(t):this.theta;
+        this.height=obj.height?obj.height(t):this.height;
+        this.thick=obj.thick?obj.thick(t):this.thick;
+        this.lineColor=obj.lineColor?obj.lineColor(t):this.lineColor;
+        this.fillColor=obj.fillColor?obj.fillColor(t):this.fillColor;
+ 
+    }
 }
 

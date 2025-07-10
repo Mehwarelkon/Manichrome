@@ -12,9 +12,9 @@ export class LinearGraph{
     
     draw(){
         this.main.ctx.beginPath();
-        this.main.ctx.moveTo(this.dom[0]*this.px+window.innerWidth/2,-this.func(this.dom[0])*this.px+window.innerHeight/2);
+        this.main.ctx.moveTo(this.dom[0]*this.px+this.main.canv.width/2,-this.func(this.dom[0])*this.px+this.main.canv.height/2);
         for(let i =this.dom[0]+this.inc;i<=this.dom[1];i+=this.inc){
-            this.main.ctx.lineTo(i*this.px+window.innerWidth/2,-this.func(i)*this.py+window.innerHeight/2);
+            this.main.ctx.lineTo(i*this.px+this.main.canv.width/2,-this.func(i)*this.py+this.main.canv.height/2);
     }
         this.main.ctx.strokeStyle=this.color.getColor();
         this.main.ctx.lineWidth=this.thick;

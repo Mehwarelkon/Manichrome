@@ -1,3 +1,4 @@
 #X fix vector line oversizing tip
-#event system 
-#use devFix in every thing 
+# event system 
+# use devFix in every thing 
+# set size and change size (canvas)

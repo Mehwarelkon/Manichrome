@@ -1,4 +1,4 @@
-
+import {Vec2} from './DataTypes.js'
 export class TouchEventListener{
     constructor({main}){
         this.main=main;
@@ -39,7 +39,7 @@ export class TouchEventListener{
             if(e.touches.length===1){//
                // e.preventDefault();
                isdragging =true;
-                this.dots[index]==undefined?(null):(this.dots[index].point=[e.touches[0].clientX-window.innerWidth/2,-e.touches[0].clientY+window.innerHeight/2]);
+                this.dots[index]==undefined?(null):(this.dots[index].point=Vec2(e.touches[0].clientX-window.innerWidth/2,-e.touches[0].clientY+window.innerHeight/2));
                 this.fun(e);
                 //this.dots?.[index]?.point=[e.touches[0].clientX-window.innerWidth/2,-e.touches[0].clientY-window.innerHeight/2];
             }//

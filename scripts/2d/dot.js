@@ -1,7 +1,8 @@
 
 import {Vec2,Color} from './DataTypes.js';
 export class Dot{
-    constructor({main,point,color=Color(0,0,0,1),size=2}){
+    constructor({main,point=Vec2(0,0),color=Color(0,0,0,1),size=2}){
+        this.temp;
         this.point=point;//Vec2
         this.color=color;//Color
         this.size=size;
@@ -11,9 +12,10 @@ export class Dot{
     }
     draw(){
         this.main.ctx.beginPath();
-        this.main.ctx.arc(this.point[0]+window.innerWidth/2,-this.point[1]+window.innerHeight/2,this.size,0,-2*Math.PI,true);
+        this.main.ctx.arc(this.point[0]+this.main.canv.width/2,-this.point[1]+this.main.canv.height/2,this.size,0,-2*Math.PI,true);
         this.main.ctx.fillStyle=`rgba(`+this.color[0]+`,`+this.color[1]+`,`+this.color[2]+`,`+this.color[3]+`)`;
         this.main.ctx.fill();
+        this.temp=Vec2(this.point[0]+this.main.canv.width/2,-this.point[1]+this.main.canv.height/2)
         }
     makeAnimation({point,color,size,startTime,endTime,type="linear"}){
         let p;
@@ -65,4 +67,9 @@ export class Dot{
         }//
         this.main.addProcess([f,startTime,endTime]);
     } 
+    bind(obj,t){
+        this.point=obj.point?obj.point(t):this.point;
+        this.color=obj.color?obj.color(t):this.color;
+        this.size=obj.size?obj.size(t):this.size;
+    }
 }

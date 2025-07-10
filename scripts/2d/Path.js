@@ -16,8 +16,8 @@ export class LinearPath{
 
         for(let i=0;i<this.points.length-1;i++){
             this.main.ctx.beginPath();
-            this.main.ctx.moveTo(this.points[i][0]+window.innerWidth/2,-this.points[i][1]+window.innerHeight/2);
-            this.main.ctx.lineTo(this.points[i+1][0]+window.innerWidth/2,-this.points[i+1][1]+window.innerHeight/2);
+            this.main.ctx.moveTo(this.points[i][0]+this.main.canv.width/2,-this.points[i][1]+this.main.canv.height/2);
+            this.main.ctx.lineTo(this.points[i+1][0]+this.main.canv.width/2,-this.points[i+1][1]+this.main.canv.height/2);
             this.main.ctx.strokeStyle=this.color[i].getColor();
             this.main.ctx.lineWidth=this.thick; 
             this.main.ctx.stroke();

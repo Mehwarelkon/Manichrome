@@ -16,9 +16,9 @@ export class Circle{//circle 🙂
     }
     draw(){
         this.main.ctx.beginPath();
-        this.main.ctx.arc(this.center[0]+window.innerWidth/2,-this.center[1]+window.innerHeight/2,this.r,-this.startAngle,-this.endAngle,true);
-        //arc angles cant be negative so i need to revert it ,but since -180 to 180 is a full circle the normal method(this.angle(endAngle)) will make it 180 to 180 so nothing will draw thats why i added the deltaAngle
-        if(this.isLine){
+        this.main.ctx.arc(this.center[0]+this.main.canv.width/2,-this.center[1]+this.main.canv.height/2,this.r,-this.startAngle,-this.endAngle,true);
+        
+            if(this.isLine){
             this.main.ctx.strokeStyle=this.lineColor.getColor()
             this.main.ctx.lineWidth=this.thick;
             if(this.isClosed){this.main.ctx.closePath();}
@@ -104,6 +104,16 @@ export class Circle{//circle 🙂
              console.log(JSON.stringify(this.center))
         }//
         this.main.addProcess([f,startTime,endTime]);
+    }
+    bind(obj,t){
+        //center,r,startAngle,endAngle,thick,lineColor,fillColor
+        this.center=obj.center?obj.center(t):this.center;
+        this.r=obj.r?obj.r(t):this.r;
+        this.startAngle=obj.startAngle?obj.startAngle(t):this.startAngle;
+        this.endAngle=obj.endAngle?obj.endAngle(t):this.endAngle;
+        this.thick=obj.thick?obj.thick(t):this.thick;
+        this.lineColor=obj.lineColor?obj.lineColor(t):this.lineColor;
+        this.fillColor=obj.fillColor?obj.fillColor(t):this.fillColor;
     }
 
 }

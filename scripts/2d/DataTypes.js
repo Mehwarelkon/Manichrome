@@ -48,9 +48,9 @@ export function Vec2(x,y){
     vec.clone=function(){
         return Vec2(vec[0],vec[1]);
     }
-   vec.devFix=function(){
-      return Vec2(vec[0]+window.innerWidth/2,-vec[1]+window.innerHeight/2);
-   }
+   /*vec.devFix=function(){
+      return Vec2(vec[0]+this.main.canv.width,-vec[1]+this.main.canv.height);
+   }*/
    vec.type="Vec2";
     return vec;
 }

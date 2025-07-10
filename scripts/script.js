@@ -1,17 +1,44 @@
 
 import * as Man from './Manichrome.js';
+const edit= new Man.Editor(300,100,[0,0],[10,5]);
+var i =0;
+edit.setup();
+/*const main =new Man.Main2d();
+function first(delta){
+   console.log(1);
+}
+function sec(delta){
+   console.log(2);
+}
+function third(delta){
+   console.log(3);
+}
+function fourth(delta){
+   console.log(4);
+}
+main.addProcess([first,0,1000]);
+main.addProcess([sec,1000,2000]);
+main.addProcess([third,2000,3000]);
+main.addProcess([fourth,3000,4000]);
+main.refresh();*/
+/*
 const main =new Man.Main2d();
 let Vec2=Man.Vec2;
 let Color=Man.Color;
+const dot =new Man.Dot({main:main,point:Man.Vec2(100,100)})
 const sp =new Man.Vector({main:main,point1:Vec2(0,0),point2:Man.Vec2(100,100),color:Man.Color(255,0,0,1),thick:4,tipSize:6});
-sp.makeAnimation({startTime:0,endTime:2000,type:'easeInOutSin',point1:Vec2(100,100),point2:Man.origin,color:Color(0,0,255,1),thick:20,tipSize:30});
+sp.makeAnimation({startTime:0,endTime:2000,type:'easeInOutSin',point1:Man.Vec2(-100,-100),point2:Vec2(-100,-100),color:Color(0,0,255,1),thick:20,tipSize:30});
 function anim(delta){
-    sp.draw();
-    console.log(JSON.stringify(sp.tip))
+   sp.draw();
+   dot.point=sp.point1.clone();
+   dot.draw();
+   console.log(dot.temp.sub(sp.temp))
+  // sp.point1[0]-=2
+   // console.log(JSON.stringify(sp.tip))
 }
 main.addProcess([anim,0,5000]);
 main.refresh();
-
+*/
 /*let tip=0;
 let th=10;
 const main =new Man.Main2d();
