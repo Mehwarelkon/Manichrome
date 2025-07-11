@@ -1,10 +1,10 @@
-v2.2.0
-# added a dataType Vec2 that is a vector (mathmatically) having properties like add dot cross getLength mul normalize getAngle getAngleTo 
-#added Datatype Color 
-v2.2.1
+# v2.2.0
+### added a dataType Vec2 that is a vector (mathmatically) having properties like add dot cross getLength mul normalize getAngle getAngleTo 
+### added Datatype Color 
+# v2.2.1
 updated some of the readme
-v2.2.2
-## added the bind method to 
+# v2.3.0
+### added the bind method to 
 line 
 vector 
 circle 
@@ -12,7 +12,7 @@ triangle
 rect
 dot
 which update/animate the object 
-### ex
+##### ex
 ```js
 import * as Man from './Manichrome.js';
 const main =new Man.Main2d();
@@ -34,5 +34,7 @@ main.addProcess([anim,0,2000,{con:false}]);
 main.refresh();
 
 ```
-## also added makeAnimation to triangles
-## 
+### also added makeAnimation to triangles
+# v2.3.1
+### added a mini Editor
+### added an event system 

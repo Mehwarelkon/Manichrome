@@ -1,8 +1,19 @@
 
 import * as Man from './Manichrome.js';
-const edit= new Man.Editor(300,100,[0,0],[10,5]);
-var i =0;
-edit.setup();
+let i={line:100};
+
+
+const main =new Man.Main2d(200,200,[0,50]);
+const line =new Man.Line({main:main});
+line.point2[0]=i.line;
+function a(){
+    line.draw();
+    line.point2[0]=i.line;
+}
+main.addEvent([()=>{console.log(i.line)},5000])
+const edit= new Man.Editor([0,-100],i);
+main.addProcess([a,0,undefined]);
+main.refresh();
 /*const main =new Man.Main2d();
 function first(delta){
    console.log(1);

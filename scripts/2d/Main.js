@@ -2,6 +2,7 @@ import {Color,Vec2} from './DataTypes.js';
 export class Main2d {//the main class is the canvas that get drawn on 
     constructor(w=window.innerWidth,h=window.innerHeight,center=Vec2(0,0)){
         //this.c;
+        
         this.d=Vec2(w,h)
         this.canv=document.createElement("canvas");
         document.body.appendChild(this.canv);
@@ -23,6 +24,7 @@ export class Main2d {//the main class is the canvas that get drawn on
         this.ctx=this.canv.getContext("2d");
         this.funcs=[];//this varible will hold the bodies that will be excuted
         this.running=[];//this variable holds the bodies that are being excuted 
+        this.events=[];
         this.delta=0;
         this.current=0;
     }
@@ -63,6 +65,17 @@ export class Main2d {//the main class is the canvas that get drawn on
             }
            else{break;}
         }
+        while(true){
+            if(this.events[0]===undefined){break;}
+            else if(this.events[0][1]<=performance.now()-cur){
+                this.events[0][0]();
+                this.events.shift();
+            }
+            else{break;}
+        }
+    }
+    addEvent(event){//event is like [func,starttime]
+        this.imp(event,this.events);
     }
     refresh(){//this just calls process every frame (user should call it at the end of the animtion)
         var cur =performance.now();
@@ -191,43 +204,44 @@ export class Main2d {//the main class is the canvas that get drawn on
         this.d=Vec2(w,h);
     }
 }
-/*
 export class Editor{
-    constructor(w,h,center,m=[10,10]){
-        this.editorDiv=document.createElement('div');
-        this.editorInp=document.createElement('textarea');
-        this.d=[w,h,center,m];
+    constructor(center,vars){
+        this.center=center;
+        this.vars=vars;
+        this.elements;
+        //
+        this.div=document.createElement('div');
+        this.div.style.position ='absolute';
+        this.div.style.top=-this.center[1]+window.innerHeight/2 +'px';
+        this.div.style.left=this.center[0]+window.innerWidth/2 +'px';
+        document.body.appendChild(this.div);
+        this.div.style.background=Color(100,100,100,1).getColor();
+        this.div.style.transform='translate(-50%,-50%)';
+        //
+        for(let key in this.vars){
+            //
+            let miniDiv=document.createElement('div');
+            miniDiv.style.margin=5+'px';
+            miniDiv.style.padding=5+'px';
+            miniDiv.style.gap=10+'px'
+            miniDiv.style.display='flex'
+            miniDiv.style.background=Color(200,200,200,1).getColor();
+            //
+            let text=document.createTextNode(key+'');
+            let inp =document.createElement('input');
+            inp.style.width='40px';
+            //inp.style.height='20px';
+            this.div.appendChild(miniDiv);
+            miniDiv.appendChild(text);
+            miniDiv.appendChild(inp);
+            inp.value=this.vars[key];
+            inp.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        let val =Number(inp.value)
+        this.vars[key] = isNaN(val)?inp.value:val;
+        console.log(`Updated ${key} to`, this.vars[key]);
     }
-    setup(){
-        this.editorDiv.style.position='absolute';
-        this.editorDiv.style.width=this.d[0]+this.d[3][0]+10+'px';
-        this.editorDiv.style.height=this.d[1]+this.d[3][1]+10+'px';
-        this.editorDiv.style.top=-this.d[2][1]+window.innerHeight/2+'px';
-        this.editorDiv.style.left=this.d[2][0]+window.innerWidth/2 +'px';
-        this.editorDiv.style.transform='translate(-50%,-50%)';
-        this.editorDiv.style.background=Color(100,100,100,1).getColor();
-        document.body.appendChild(this.editorDiv);
-        this.editorInp.style.position='absolute';
-        this.editorInp.style.width=this.d[0]+'px';
-        this.editorInp.style.height=this.d[1]+'px';
-        this.editorInp.style.top=-this.d[2][1]+window.innerHeight/2+'px';
-        this.editorInp.style.left=this.d[2][0]+window.innerWidth/2 +'px';
-        this.editorInp.style.transform='translate(-50%,-50%)';
-        document.body.appendChild(this.editorInp);
-        this.editorInp.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault(); // stop newline if needed
-                const lines = this.editorInp.value.split('\n');
-                const lastLine = lines[lines.length - 1].trim();
-                this.handleCommand(lastLine); // custom function
-            }
-        });
+});
+        }
     }
-    handleCommand(lastLine){
-        console.log(lastLine);
-        this.editorInp.value=lastLine+'\n';
-        let val=eval(lastLine);
-        this.editorInp.value+=(val??'');
-        this.editorInp.value+='\n';
-    }
-}*/
+}

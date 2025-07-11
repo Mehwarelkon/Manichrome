@@ -26,10 +26,15 @@ import {Circle,Vec2,Line} from './Manichrome.js';
  const main = new Man.Main2d();
  ```
  if you have manichrome as Man
+ 
  it has methods like 
 
- ###addProcess(body
- )=>here you add your function that will be processed every frame
+ ### addProcess(body)
+ =>here you add your function that will be processed every frame
+ body is an array such that `[function,startTime ms,endTime ms]`
+ ### addEvent(body)
+ => here you add your function that happens once at a spacific time 
+ body is an array such that `[function,startTime]`
  
  ### refresh() 
  => this is the entry point of the animation
